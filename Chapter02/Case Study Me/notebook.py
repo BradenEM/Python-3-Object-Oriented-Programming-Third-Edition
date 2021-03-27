@@ -41,7 +41,7 @@ class Notebook:
         '''Locate the note with the given id'''
 
         for note in self.notes:
-            if note.id == note_id:
+            if str(note.id) == note_id:
                 return note
             return None
 
@@ -53,7 +53,11 @@ class Notebook:
     def modify_memo(self, note_id, memo):
         '''Find the note with the given id and change its memo to the given value'''
 
-        self._find_note(note_id).memo = memo
+        note = self._find_note(note_id)
+        if note:
+            note.memo = memo
+            return True
+        return False
 
     def search(self, filter):
         '''Find all notes that match the given filter string'''
